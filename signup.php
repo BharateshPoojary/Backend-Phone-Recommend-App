@@ -22,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){//This line checks if the HTTP request m
    }
    else{
    if ($password==$cpassword) {
+      $hash=password_hash($password);   
       $sql="INSERT INTO `users` (`username`, `password`, `dt`) VALUES ( '$userdetail', '$password', current_timestamp())";
       //This line constructs an SQL query to insert data into a table named "users". 
       //It inserts the submitted username, password, and the current timestamp into the respective columns of the table.
