@@ -1,22 +1,27 @@
 <?php
 $login=false;
 $logindenied=false;
+$incorrectpassword=false;
 
 if ($_SERVER["REQUEST_METHOD"]=="POST"){
    include "partials/_dbconnect.php";
    $userdetail=$_POST["username"];
    $password=$_POST["password"];
-
-    $sql="Select * from users where username ='$userdetail' AND password = '$password'";
-    $result=mysqli_query($conn,$sql);
-    $num = mysqli_num_rows($result);
-    if($num==1){
-        $login=true;
-        session_start();
-        $_SESSION['userdetail']= $userdetail;
-        header("location: welcome.php");
-       }
-    else{
+   $sql="Select * from users where username ='$userdetail' ";
+   $result=mysqli_query($conn,$sql);
+   $num = mysqli_num_rows($result);
+   if($num==1){
+      $row=mysqli_fetch_assoc($result);
+      $verified=password_verify($password,$row['password']);
+      if ($verified){
+         $login=true;
+         session_start();
+         $_SESSION['userdetail']= $userdetail;
+         header("location: welcome.php");
+      }else{
+         $incorrectpassword=true;
+        }    
+   }else{
       $logindenied=true;
    }  
 }
@@ -25,6 +30,10 @@ if ($login) {
    echo "<script type='text/javascript'>alert('$message');</script>";  }
 if($logindenied){
    $errormessage = "Sorry! cant login invalid credentials ";
+   echo "<script type='text/javascript'>alert('$errormessage');</script>"; 
+}
+if($incorrectpassword){
+   $errormessage = "Cant login ! Invalid Password ";
    echo "<script type='text/javascript'>alert('$errormessage');</script>"; 
 }
 ?>

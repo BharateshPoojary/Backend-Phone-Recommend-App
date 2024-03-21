@@ -1,4 +1,19 @@
 <?php
+// Allow from any origin
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Max-Age: 86400');    // cache for 1 day
+}
+
+// Access-Control headers are received during OPTIONS requests
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");         
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+    exit(0);
+}
 $showAlert=false;
 $showError=false;
 //The above 2 variables are just used to show Alert or Error when it becomes true default is false 
@@ -7,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){//This line checks if the HTTP request m
    include "partials/_dbconnect.php";//This line includes the contents of another file named "_dbconnect.php" into the current script. This file likely contains the code to establish a connection to the database.
    $userdetail=$_POST["username"];
    $password=$_POST["password"];
-   $cpassword=$_POST["cpassword"];
+   $cpassword=$_POST["cpassword"];                                                                                                                                                                                                                          
    /**
     * These lines retrieve the values submitted through a form using the POST method.
     * The values are stored in variables $uerdetail, $password, and $cpassword, respectively. 
@@ -22,8 +37,8 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){//This line checks if the HTTP request m
    }
    else{
    if ($password==$cpassword) {
-      $hash=password_hash($password);   
-      $sql="INSERT INTO `users` (`username`, `password`, `dt`) VALUES ( '$userdetail', '$password', current_timestamp())";
+      $hash=password_hash($password,PASSWORD_DEFAULT);   
+      $sql="INSERT INTO `users` (`username`, `password`, `dt`) VALUES ( '$userdetail', '$hash', current_timestamp())";
       //This line constructs an SQL query to insert data into a table named "users". 
       //It inserts the submitted username, password, and the current timestamp into the respective columns of the table.
       $result=mysqli_query($conn,$sql);
