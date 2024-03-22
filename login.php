@@ -2,12 +2,14 @@
 header("Access-Control-Allow-Origin:http://127.0.0.1:5500");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+include "partials/_dbconnect.php";
+
 
 if ($_SERVER["REQUEST_METHOD"]=="POST"){
    $login=false;
    $logindenied=false;
    $incorrectpassword=false;
-   include "partials/_dbconnect.php";
+
    $userdetail=$_POST["username"];
    $password=$_POST["password"];
    $sql="Select * from users where username ='$userdetail' ";
