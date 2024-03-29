@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
    $userdetail=$_POST["username"];
    $password=$_POST["password"];
    $sql="Select * from users where username ='$userdetail' ";
-   $result=mysqli_query($conn,$sql);
+   $result=mysqli_query($userconn,$sql);
    $num = mysqli_num_rows($result);
    if($num==1){
       $row=mysqli_fetch_assoc($result);
