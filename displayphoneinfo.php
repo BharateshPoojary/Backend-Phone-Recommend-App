@@ -6,7 +6,7 @@ include "partials/_dbconnect.php";
 
 
 if($_SERVER['REQUEST_METHOD']=='GET' ){
-$selectphoneinfoSql = "Select * from phoneinfo";
+$selectphoneinfoSql = "Select * from phoneinfo " ;
 $result = mysqli_query($phoneinfoconn,$selectphoneinfoSql);
 header('Content-Type:application/json');
 $phonesArray=array();
@@ -17,7 +17,8 @@ while($phonesavailableintable=mysqli_fetch_assoc($result)){
 }
 
 
-$reversedArray = array_reverse($phonesArray);
+$reversedArray[] = array_reverse($phonesArray);
+$reversedArray[] = "HI";
 echo json_encode($reversedArray); 
 mysqli_close($phoneinfoconn);
 }else {

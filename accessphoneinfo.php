@@ -13,6 +13,10 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     $FrontCamera=$_POST["FrontCamera"];
     $Battery=$_POST["Battery"];
     $Display=$_POST["Display"];
+    $OS=$_POST['OS'];
+    $Storage=$_POST['Storage'];
+    $Level =$_POST['Level'];
+
 
     $existSql = "Select * from phoneinfo WHERE PhoneName='$PhoneName'";
     $result = mysqli_query($phoneinfoconn,$existSql);
@@ -24,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
        </script>"; 
     }
     else{
-        $insertsql="INSERT INTO `phoneinfo` ( `PhoneName`, `PhoneImageUrl`, `Price`, `Ram`, `Processor`, `RearCamera`, `FrontCamera`, `Battery`, `Display`) VALUES ( '$PhoneName', '$PhoneImageUrl', '$Price', '$Ram', '$Processor', '$RearCamera', '$FrontCamera','$Battery', '$Display')";
+        $insertsql="INSERT INTO `phoneinfo` ( `PhoneName`, `PhoneImageUrl`, `Price`, `Ram`, `Processor`, `RearCamera`, `FrontCamera`, `Battery`, `Display`,`OS`,`Storage`,`Level`) VALUES ( '$PhoneName', '$PhoneImageUrl', '$Price', '$Ram', '$Processor', '$RearCamera', '$FrontCamera','$Battery', '$Display','$OS','$Storage','$Level')";
         $result=mysqli_query($phoneinfoconn,$insertsql);
         if($result){
             $insertedsuccessfully="Phone data inserted successfully";
