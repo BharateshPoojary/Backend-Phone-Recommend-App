@@ -18,7 +18,7 @@ while($topphonesavailableintable=mysqli_fetch_assoc($result)){
 
 $MainArray[]=$topphonesArray;
 
-$selectbestphoneinAndroidinfoSql = "Select * from phoneinfo WHERE Level='Best' AND OS = 'Android'" ;
+$selectbestphoneinAndroidinfoSql = "Select * from phoneinfo WHERE sno BETWEEN 2 AND 21" ;
 $result = mysqli_query($phoneinfoconn,$selectbestphoneinAndroidinfoSql);
 
 while($bestphonesinAndroidavailableintable=mysqli_fetch_assoc($result)){
@@ -35,6 +35,43 @@ while($bestphonesinIOSavailableintable=mysqli_fetch_assoc($result)){
    
 }
 $MainArray[]=$bestphonesinIOSArray;
+
+$Under10kavailableinfoSql = "Select * from phoneinfo WHERE  Price <= 10000" ;
+$result = mysqli_query($phoneinfoconn,$Under10kavailableinfoSql);
+
+while($Under10kavailableintable=mysqli_fetch_assoc($result)){
+    $Under10kavailableArray[]=$Under10kavailableintable;  
+   
+}
+$MainArray[]= $Under10kavailableArray;
+
+$Under20kavailableinfoSql = "Select * from phoneinfo WHERE  Price BETWEEN 10001 AND 20000" ;
+$result = mysqli_query($phoneinfoconn,$Under20kavailableinfoSql);
+
+while($Under20kavailableintable=mysqli_fetch_assoc($result)){
+    $Under20kavailableArray[]=$Under20kavailableintable;  
+   
+}
+$MainArray[]= $Under20kavailableArray;
+
+
+$Under40kavailableinfoSql = "Select * from phoneinfo WHERE  Price BETWEEN 20001 AND 40000" ;
+$result = mysqli_query($phoneinfoconn,$Under40kavailableinfoSql);
+
+while($Under40kavailableintable=mysqli_fetch_assoc($result)){
+    $Under40kavailableArray[]=$Under40kavailableintable;  
+   
+}
+$MainArray[]= $Under40kavailableArray;
+
+$Under70kavailableinfoSql = "Select * from phoneinfo WHERE  Price BETWEEN 40001 AND 70000" ;
+$result = mysqli_query($phoneinfoconn,$Under70kavailableinfoSql);
+
+while($Under70kavailableintable=mysqli_fetch_assoc($result)){
+    $Under70kavailableArray[]=$Under70kavailableintable;  
+   
+}
+$MainArray[]= $Under70kavailableArray;
 echo json_encode($MainArray); 
 mysqli_close($phoneinfoconn);
 }else {
