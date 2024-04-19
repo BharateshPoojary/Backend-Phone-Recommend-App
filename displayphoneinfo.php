@@ -72,6 +72,15 @@ while($Under70kavailableintable=mysqli_fetch_assoc($result)){
    
 }
 $MainArray[]= $Under70kavailableArray;
+
+$Above80kavailableinfoSql = "Select * from phoneinfo WHERE  Price >=80000" ;
+$result = mysqli_query($phoneinfoconn,$Above80kavailableinfoSql);
+
+while($Above80kavailableintable=mysqli_fetch_assoc($result)){
+    $Above80kavailableArray[]=$Above80kavailableintable;  
+   
+}
+$MainArray[]= $Above80kavailableArray;
 echo json_encode($MainArray); 
 mysqli_close($phoneinfoconn);
 }else {
