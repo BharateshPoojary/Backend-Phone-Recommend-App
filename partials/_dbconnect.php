@@ -8,11 +8,11 @@ $password="";// This line initializes a variable called `$password` and sets it 
 $database="phonerecommendapp";
 //This line assigns the name of the database you want to connect to the variable $database. 
 //In this case, it's set to "users", which is the name of the database you want to access.
-$userconn=mysqli_connect($server,$username,$password,$database);
+$conn=mysqli_connect($server,$username,$password,$database);
 //This line establishes a connection to the MySQL database using the `mysqli_connect()` function. 
 //It takes four parameters: the server name, the username, the password, and the name of the database. 
 //It returns a connection object if successful, which is stored in the variable `$userconn`.
-if(!$userconn){
+if(!$conn){
 //     echo "succcess";
 // }
 // else{
@@ -28,13 +28,13 @@ if(!$userconn){
  */
 
 //phone info database connection
-$server="localhost";
-$username="root";
-$password="";
-$database="phonerecommendapp";
+// $server="localhost";
+// $username="root";
+// $password="";
+// $database="phonerecommendapp";
 
-$phoneinfoconn=mysqli_connect($server,$username,$password,$database);
-if(!$phoneinfoconn){
-    die("Error".mysqli_connect_error());
-}
+// $phoneinfoconn=mysqli_connect($server,$username,$password,$database);
+// if(!$phoneinfoconn){
+//     die("Error".mysqli_connect_error());
+// }
 ?>

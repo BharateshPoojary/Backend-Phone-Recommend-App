@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
 
 
     $existSql = "Select * from phoneinfo WHERE PhoneName='$PhoneName'";
-    $result = mysqli_query($phoneinfoconn,$existSql);
+    $result = mysqli_query($conn,$existSql);
     $numExistRows = mysqli_num_rows($result);
     if($numExistRows>0){
        $phonenameexist="Phone Already Exists";
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     }
     else{
         $insertsql="INSERT INTO `phoneinfo` ( `PhoneName`, `PhoneImageUrl`, `Price`, `Ram`, `Processor`, `RearCamera`, `FrontCamera`, `Battery`, `Display`,`OS`,`Storage`,`Level`) VALUES ( '$PhoneName', '$PhoneImageUrl', '$Price', '$Ram', '$Processor', '$RearCamera', '$FrontCamera','$Battery', '$Display','$OS','$Storage','$Level')";
-        $result=mysqli_query($phoneinfoconn,$insertsql);
+        $result=mysqli_query($conn,$insertsql);
         if($result){
             $insertedsuccessfully="Phone data inserted successfully";
             echo "<script type='text/javascript'>alert('$insertedsuccessfully');

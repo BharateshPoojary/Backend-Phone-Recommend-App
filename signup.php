@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){//This line checks if the HTTP request m
     *These variables likely correspond to the username, password, and confirm password fields in a form.
     */
    $existSql="Select * from users WHERE username ='$userdetail'";
-   $result = mysqli_query($userconn,$existSql);
+   $result = mysqli_query($conn,$existSql);
    $numExistRows = mysqli_num_rows($result);
    if($numExistRows>0){
       $usernameexist="Username Already Exists";
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){//This line checks if the HTTP request m
       $sql="INSERT INTO `users` (`username`, `password`, `dt`) VALUES ( '$userdetail', '$hash', current_timestamp())";
       //This line constructs an SQL query to insert data into a table named "users". 
       //It inserts the submitted username, password, and the current timestamp into the respective columns of the table.
-      $result=mysqli_query($userconn,$sql);
+      $result=mysqli_query($conn,$sql);
       //The mysqli_query() function executes/performs the given query on the database.
       //mysqli_query($con, query)
       // Takes mainly 2 important parameter 
