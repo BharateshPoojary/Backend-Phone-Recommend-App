@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
         }
         echo json_encode($phonedataArray);
     }else{
-        $JSONmessage = ["message" =>"There is nothing in your compare list"];
+        $JSONmessage = ["message" =>"There is nothing in your Wish list"];
         echo json_encode($JSONmessage);
     }
 }
